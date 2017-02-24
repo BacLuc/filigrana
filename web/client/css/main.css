@@ -1,0 +1,128 @@
+@CHARSET "UTF-8";
+
+.page{
+	margin-top: auto;
+	margin-bottom: auto;
+	display: none;
+
+}
+
+.hidden{
+	display: none;
+}
+
+.button_menu {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width:600px;
+}
+
+
+
+#menu_page > .btn-block{
+	min-height:500 px;
+}
+
+.fixed{
+	position: fixed;
+	
+}
+
+.fill_screen_div{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+canvas{
+	position: absolute;
+	
+}
+#background_between{
+	z-index: -9;
+	background-color: white;
+	position: absolute;
+}
+
+#draw{
+	z-index: 10;
+}
+
+#nodraw{
+	z-index: -10;
+}
+table{
+	margin: 0 auto;
+	min-width: 300px;
+}
+
+td{
+	min-width: 300px;
+}
+
+.nav >li{
+	margin: 10px;
+}
+
+.panel-heading{
+	min-height: 60px;
+}
+
+.fix_button_right{
+	position: absolute;
+	right: 0px;
+	
+}
+
+.row{
+	margin-top: 5px;
+}
+
+select{
+	height: 90%;
+}
+
+.row.searchresultrow{
+	border-style: solid;
+    border-width: 1px;
+    max-height: 150px;
+	overflow: hidden;
+}
+.row.clickable img{
+	max-height: 100px;
+}
+
+.limitedheight {
+	max-height: 100px;
+}
+
+
+.slider.slider-horizontal{
+	width: 100%;
+} 
+
+.green-glaphicolon{
+	color: green;	
+}
+
+.plusButton{
+	background-color: transparent;
+}
+
+.imagetrashdiv{
+	position: absolute;
+	bottom: 60%;
+	left: 60%;
+}
+
+
+.bigbutton{
+	font-size: xx-large;
+}
+
+.wrapfield{
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+

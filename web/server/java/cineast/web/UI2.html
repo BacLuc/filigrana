@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<title>Cineast UI v0.02</title>
+	<script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="js/draw.js"></script>
+    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="js/colorpicker.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script>
+    var color;
+    $(function(){
+    	$("#slider").slider({
+    		value: 0.5,
+    		min: 0,
+    		max: 1,
+    		step: 0.001
+    	}
+    );
+    $(function(){
+    	$("#submit").button().click(function(){
+    		var loadingHTML = "<p class=\"text-center h2\">Searching, please wait...</p>";
+    		$("#result").html(loadingHTML);
+    		$('#submit').removeClass('btn-primary').removeClass('btn-success').addClass('btn-warning');
+    		var text = $('#text').val();
+    		var canvas = $('#imageCanvas')[0];
+    		var url = canvas.toDataURL();
+    		var slider = $('#slider').slider("value");
+    		
+    		var requestString = "{\"img\": \"" + canvas.toDataURL() + "\",\n";
+    		requestString += "\"start\": " + slider + ",\n";
+    		requestString += "\"end\": " + slider + ",\n";
+    		requestString += "\"subelements\": [\"" + text + "\"]}";
+    		
+			$.ajax({type: "POST", url: "ajax.php", data:{query: requestString}, dataType: "json"}).done(function(data){
+				var resultHTML = "<table class=\"table table-hover table-bordered\"><thead><tr><td></td><td>Score</td><td>Video</td><td>Start Frame </td><td>End Frame </td><td>Shot ID</td><td>Video ID</td></tr></thead><tbody>";
+				$.each(data, function(key, val) {
+				  resultHTML += "<tr><td><img src=\"../thumbnails/" + val.videoid + "/" + val.shotid + ".png\" class=\"img-thumbnail\" /></td><td>" + val.score + "</td><td>" + val.name + "</td><td>" + val.startframe + "</td><td>" + val.endframe + "</td><td>" + val.shotid + "</td><td>" + val.videoid + "</td></tr>";
+				});
+				resultHTML += "</tbody></table>";
+				$("#result").html(resultHTML);
+				$('#submit').removeClass('btn-warning').addClass('btn-success');
+			});
+			
+    	});
+    });
+    $(function() {
+    $('#file-input').change(function(e) {
+        var file = e.target.files[0],
+            imageType = /image.*/;
+        
+        if (!file.type.match(imageType))
+            return;
+        
+        var reader = new FileReader();
+        reader.onload = fileOnload;
+        reader.readAsDataURL(file);
+        
+    });
+    
+    function fileOnload(e) {
+        var $img = $('<img>', { src: e.target.result });
+        var canvas = $('#imageCanvas')[0];
+        var context = canvas.getContext('2d');
+
+        $img.load(function() {
+            context.drawImage(this, 0, 0, 500, 300);
+        });
+    }
+	});
+	$(initCanvasDrawing());
+	$( $('#colorpickerHolder').ColorPicker({flat: true, onChange: function(hsb, hex, rgb, el) {
+		var colorString = "rgba(" + rgb.r + ", " + rgb.g + "," + rgb.b + ", 1.0)";
+		$('#color').val(colorString);
+	}}));
+    });
+    </script>
+    <style>
+    #slider{
+    	float: left;
+    	width: 500px;
+    }
+    #imageCanvas{
+    	border:1px solid #000000;
+    }
+    #text{
+    	width: 500px;
+    	height : 100px;
+    }
+    #result{
+    	height: 600px;
+    	overflow: scroll;
+    }
+    </style>
+</head>
+<body>
+	<table><tr><td>
+		<canvas width="500px" height="300px" id="imageCanvas"  onmousedown="mousedown(event);" onmouseup="mouseup();" onmousemove="mousemove();"></canvas> <br />
+		<input id ="color" type="text" value="0" /><div id="colorpickerHolder"></div> 
+		<div id="slider"></div> <br />
+		<textarea id="text"></textarea> <br />
+		<input type="file" id="file-input"> <br />
+		<!--<input type="text" id="imgurl" value=""/> <input type="submit" id="loadimg" value="load image from url" />-->
+		<input id="submit" type="submit" value=" Search " class="btn btn-primary">
+	</td><td>
+		<div id="result"></div>
+	</td></tr></table>
+	<object id="wtPlugin" type="application/x-wacomtabletplugin" style="position:absolute; left:100px; top:100px" height="1" width="1">
+	    <!-- <param name="onload" value="pluginLoaded" /> -->
+    </object>
+</body>

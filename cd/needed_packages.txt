@@ -1,0 +1,4 @@
+sudo apt-get install php5-imagick
+sudo apt-get install php5-pgsql
+sudo apt-get install sendmail
+sudo apt-get install ssmtp

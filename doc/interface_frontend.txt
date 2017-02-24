@@ -1,0 +1,388 @@
+InvitateUser
+
+	request = {
+		action: "invitateUser",
+		researchgroup: resid,
+		email: "lucius.bachmann@gmx.ch"
+
+	}
+
+	response = {
+		check: "suc | alu (already a user) | ser, nri (no rights)"
+		result: new userid
+
+	}
+
+CheckLink
+	request = {
+		action: "checkHash",
+		hash: "asfjaökasjdöfkljasöflasdfkjq584'14ölmjfas0f9142"
+
+	}
+
+	response = {
+		check: "suc | nhf (no hash found) | alv (already validatet |ser",
+		email: "lucius.bachmann@gmx.ch"
+
+	}
+	
+RegisterUser
+	request = {
+		action: "RegisterUser",
+		username: "myusername",
+		pw1: "password1",
+		pw2: "password2"
+	
+	}
+	
+	response = {
+		check: suc, ivp (invalid Password), pns (passwords not the same), ser
+	
+	
+	}
+	
+Login
+	request = {
+		action: "Login",
+		email: "lucius.bachmann@gmx.ch",
+		pw: "password",
+		
+	
+	}
+	
+	response = {
+		check: suc, enf (email not found), wpa (wrong Password), ser
+	
+	
+	}
+	
+SwitchUserGroup
+	request = {
+		action: "SwitchResearchGroup",
+		groupid: id
+	
+	}
+	
+	response = {
+		check: suc,nri,ser
+	
+	
+	}
+	
+EditUser
+	request = {
+		action: "EditUser",
+		username: "myusername",
+		email : "email",
+		oldpw: "oldpw",
+		newpw: "newpw1",
+		newp2w: "newpw2",
+		del : true/false
+	
+	}
+	
+	response = {
+		check: suc, ivp (invalid Password), pns (passwords not the same), emc(email change, Warning, because validation), ser
+	
+	
+	}
+	
+NewResearchgroup
+	request = {
+		action: "newResearchgroup",
+		name: "name",
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), nau (name already used), ser
+	
+	
+	}
+	
+EditResearchGroup
+	request = {
+		action: "editResearchGroup",
+		res_id :id
+		newname: "name",
+		newuser: id,
+		edituser: id,
+		role_id: id,
+		removeuser: id,
+		del: true/false
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), nau (name already used), ser
+	
+	
+	}
+	
+UplaodImage
+	request = {
+		action: "uploadImage",
+		index: "name of File Field",
+		file: ,
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), noi ( no image), baf (bad format (Warning)), ser
+		path: pfad
+	
+	
+	}
+	
+UploadSektch
+request = {
+		action: "uploadSketch",
+		file: base_64 encoded img,
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), noi ( no image), baf (bad format (Warning)), ser
+	
+	
+	}
+	
+	
+SearchWatermarks
+request = {
+		action: "SearchWatermarks",
+		file : base_64 encoded png
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), nrf ( results found), ser
+		result: [34 : 0,82354 ,56 : 0,7892348,90...]
+	
+	}
+	
+SearchIPHTypes
+request = {
+		action: "SearchIPHTypes",
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), nrf ( results found), ser
+		result: [34 : 0.48789289,576 : 0.325245,45....]
+	
+	}
+	
+SelectWatermark : 	
+	request = {
+		action: "selectWatermark",
+		wmid: 1,
+		
+	}
+	
+	response = {
+		check: suc, ser
+	
+	
+	}
+	
+	
+SelectIPHType
+	request = {
+		action: "SelectIPHType",
+		iphid: 1,
+		
+	}
+	
+	response = {
+		check: suc, ser
+	
+	
+	}
+	
+ManageTextsearch
+request = {
+		action: "ManageTextSearch",
+		query : "moon"
+		
+	}
+	
+	response = {
+		check: suc, nri (no rights), nrf ( results found), ser
+		result: [{ id:34, type: 'wm'},{ id:34, type: 'wm'},{ id:34, type: 'wm'},]
+	
+	}
+
+
+GetWatermark{
+	request = {
+		action : "GetWatermark"
+		wmid : 3
+	}
+	
+	response:
+		check: suc, ser,	
+		result: 
+					wm: 1
+					img: [ {id: 2, path: path1}, {id: 2, path: path1}....]
+					sketches: [ {id: 2, path: path1}, {id: 2, path: path1}...]
+					name: IPH 1
+					metadata: [meta1 : {id: 2, property: asdf, value: asdf}", meta2 : "value" ...]
+					similarity :  
+					iph_types : 
+					url :
+
+}
+
+
+GetIPHType{
+	request = {
+		action : "getIPHType"
+		iphid : 3
+	}
+	
+	response:
+		check: suc, ser,	
+		result: 
+					iphid: 1
+					img: [ path1, path2....]
+					sketches: [ path1, path2...]
+					name: IPH 1
+					metadata: [meta1 : "value", meta2 : "value" ...]
+					similarity :  
+					supertype :
+					subtype :
+					url :
+			
+				}
+
+}
+
+EditWatermark
+
+	editWatermark{
+		action = "editWatermark"
+		wmid = 2
+		name :
+		newMetadata : [meta1 : value ...]
+		delMetadata: [id: value...]
+		newiphtypes : ...
+		deliphtypes : ....
+		newimg : [id...]
+		delimg : [id..]
+		newSketch: [id...]
+		delSektch: [id....]
+		del : true/false
+
+
+	}
+	response:{
+			check: suc, ser, nri
+		
+	}
+	
+	
+EditIPHType
+
+	editWatermark{
+		action = "editIPHType"
+		wmid = 2
+		name :
+		newMetadata : [meta1 : value ...]
+		delMetadata: [meta1: value...]
+		newiphsupertypes : ...
+		deliphsupertypes : ....
+		newiphsubtypes : ...
+		deliphsubtypes : ....
+		newimage : [id...]
+		delimage : [id..]
+		newSketch: [id...]
+		delSektch: [id....]
+		del: true/false
+
+
+	}
+	response:{
+			check: suc, ser, nri
+		
+	}
+	
+	
+getMetadataTypes {
+		action: 'getMetadataTypes'
+		query: 
+	
+	}
+
+	response:
+		check: suc, ser
+		result: ['fundort', ...]
+	
+getUsers {
+		action: 'getUsers'
+		query:
+		
+	}
+
+	response:
+		check: suc, ser
+		result: [{name: lucius, email: lucius.bachmann@gmx.ch}...]
+		
+getUser {
+		action: 'getUser'
+		usr_id : 2
+		res_id : 2
+		
+	}
+
+	response:
+		check: suc, ser
+		result:{
+			name: 
+			email: 
+			userrole: 
+		}
+				
+		
+
+	
+getResearchGroups {
+		action: 'getResearchGroups'
+	
+	}
+
+	response:
+		check: suc, ser
+		result: [{	reg_id: 2
+					name: humboldtuni
+					users: [5,4,6...]
+					edit : 0,1
+		
+					}....
+					
+			],
+		edit: 0|1
+			
+getUserRoles {
+		action: 'getUserRoles'
+		query:
+		
+	}
+
+	response:
+		check: suc, ser
+		result: [{id: 1, name: lucius, rights: ['bla' => 0,..]}...]
+		
+		
+editUserRoles {
+	action: 'editUserRoles',
+	uro_id: (if null create),
+	name : namne
+	rights: []
+
+
+}
+	
+
+
+	

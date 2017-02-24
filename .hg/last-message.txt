@@ -1,0 +1,1 @@
+fixed some strange bugs. postgresql was sending timeouts after some amount of requests.

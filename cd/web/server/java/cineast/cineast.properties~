@@ -1,0 +1,6 @@
+database=127.0.0.1:5434/cineast
+user=cineast
+pass=ilikemovies
+numbetOfPoolThreads = 8
+resultsPerModule = 100
+maxResults = 200

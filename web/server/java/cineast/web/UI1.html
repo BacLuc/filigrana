@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<title>Cineast UI v0.01</title>
+	<script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.js"></script>
+    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+    <script>
+    $(function(){
+    	$("#slider").slider({
+    		value: 0.5,
+    		min: 0,
+    		max: 1,
+    		step: 0.001
+    	}
+    );
+    $(function(){
+    	$("#submit").button().click(function(){
+    		var text = $('#text').val();
+    		var canvas = $('#imageCanvas')[0];
+    		var url = canvas.toDataURL();
+    		var slider = $('#slider').slider("value");
+    		
+    		var requestString = "{\"img\": \"" + canvas.toDataURL() + "\",\n";
+    		requestString += "\"start\": " + slider + ",\n";
+    		requestString += "\"end\": " + slider + ",\n";
+    		requestString += "\"subelements\": [\"" + text + "\"]}";
+    		
+			$.ajax({type: "POST", url: "ajax.php", data:{query: requestString}, dataType: "json"}).done(function(data){
+				var resultHTML = "<table><tr><td>Score</td><td>Video</td><td>Start Frame </td><td>End Frame </td><td>Shot ID</td></tr>";
+				$.each(data, function(key, val) {
+				  resultHTML += "<tr><td>" + val.score + "</td><td>" + val.name + "</td><td>" + val.startframe + "</td><td>" + val.endframe + "</td><td>" + val.shotid + "</td></tr>";
+				});
+				resultHTML += "</table>";
+				$("#result").html(resultHTML);
+			});
+			
+    	});
+    });
+    $(function() {
+    $('#file-input').change(function(e) {
+        var file = e.target.files[0],
+            imageType = /image.*/;
+        
+        if (!file.type.match(imageType))
+            return;
+        
+        var reader = new FileReader();
+        reader.onload = fileOnload;
+        reader.readAsDataURL(file);
+        
+    });
+    
+    function fileOnload(e) {
+        var $img = $('<img>', { src: e.target.result });
+        var canvas = $('#imageCanvas')[0];
+        var context = canvas.getContext('2d');
+
+        $img.load(function() {
+            context.drawImage(this, 0, 0, 500, 400);
+        });
+    }
+	});
+	// $(function() {
+		// $("#loadimg").button().click(function(){
+			// var img = $('<img>', { src: $('#imgurl').val() });
+			// alert($('#imgurl').val());
+			// var canvas = $('#imageCanvas')[0];
+        	// var context = canvas.getContext('2d');
+// 
+        // img.load(function() {
+            // context.drawImage(this, 0, 0, 500, 400);
+        // });
+        // img.load();
+		// });
+	// });
+    });
+    </script>
+    <style>
+    #slider{
+    	float: left;
+    	width: 500px;
+    }
+    #imageCanvas{
+    	border:1px solid #000000;
+    }
+    #text{
+    	width: 500px;
+    	height : 100px;
+    }
+    #result{
+    	height: 600px;
+    	overflow: scroll;
+    }
+    </style>
+</head>
+<body>
+	<table><tr><td>
+		<canvas width="500px" height="400px" id="imageCanvas"></canvas> <br />
+		<div id="slider"></div> <br />
+		<textarea id="text"></textarea> <br />
+		<input type="file" id="file-input"> <br />
+		<!--<input type="text" id="imgurl" value=""/> <input type="submit" id="loadimg" value="load image from url" />-->
+		<input id="submit" type="submit" value=" Seach ">
+	</td><td>
+		<div id="result"></div>
+	</td></tr></table>
+</body>

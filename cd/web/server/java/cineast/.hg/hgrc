@@ -1,0 +1,6 @@
+[paths]
+default = ssh://phab-vcs@cs-p9.cs.unibas.ch/diffusion/C/cineast/
+
+
+[ui]
+username = lucius.bachmann

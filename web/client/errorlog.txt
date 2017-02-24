@@ -1,0 +1,30 @@
+29.12.2014 15:32:02 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:33:28 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:36:49 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:39:35 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:40:27 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:41:51 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:43:05 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+29.12.2014 15:43:52 ERROR in File /var/www/html/filigrana/web/server/php/class_ResearchGroup.php at Line 77 : 
+Exception: 235037ERROR:  update or delete on table "researchgroup" violates foreign key constraint "iph_reg_fkey" on table "iph_type"
+DETAIL:  Key (reg_id)=(1) is still referenced from table "iph_type". 
+31.12.2014 13:03:35 ERROR in File /var/www/html/filigrana/web/server/php/class_UserRole.php at Line 52 : 
+Exception:  
+31.12.2014 13:18:49 ERROR in File /var/www/html/filigrana/web/server/php/class_UserRole.php at Line 54 : 
+Exception:  
+31.12.2014 13:19:28 ERROR in File /var/www/html/filigrana/web/server/php/class_UserRole.php at Line 53 : 
+Exception:  

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!-- **************************************************************************
+* TestFBCanvasScribble.html
+*    Scribble app using javascript Canvas object with WebTabletPlugin.
+*
+*    Copyright (c) Wacom Technology, Inc., 2012
+*
+* Notes:
+*    For use on Internet Explorer, Firefox, Chrome.
+*************************************************************************** -->
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>Wacom Webplugin Canvas Paint Demo</title>
+
+    <!--[if lt IE 9]>
+    <script src="excanvas.js">
+    <p>Using the excanvas.js wrapper for canvas.</p>
+    </script><![endif]-->
+
+    <script type="text/javascript">
+
+    var canvasPos = {x:0.0, y:0.0};
+    var canvasSize = {width:640, height:480};
+    var lastX = 0.0;
+    var lastY = 0.0;
+    var capturing = false;	// tracks in/out of canvas context
+    var mouseDown = false;
+
+
+
+    //************************************************************************
+    function plugin()
+    {
+        return document.getElementById('wtPlugin');
+    }
+      
+
+
+    //************************************************************************
+    function findPos(obj) 
+    {
+        var curleft = curtop = 0;
+        if (obj.offsetParent) 
+        {
+            curleft = obj.offsetLeft;
+            curtop = obj.offsetTop;
+            while (obj = obj.offsetParent) 
+            {
+                curleft += obj.offsetLeft;
+                curtop += obj.offsetTop;
+            }
+        }
+        return {x:curleft, y:curtop};
+    }
+      
+
+
+    //************************************************************************
+    function onLoad()
+    {
+        var canvas = document.getElementById('canvas');        
+        canvasPos = findPos(canvas);
+	canvas.addEventListener("mousemove", mousemove, true);
+	canvas.addEventListener("mouseup", mouseup, true);
+	canvas.addEventListener("mousedown", mousedown, true); 
+
+        // Show plugin version
+	_docPluginVersion           = document.getElementById('docPluginVersion');
+	_docPluginVersion.innerHTML = "Plugin Version: " + plugin().version;
+    }
+
+
+
+    //************************************************************************
+    function pluginLoaded()
+    {
+	alert("PluginLoaded");
+    }
+      
+
+
+    //************************************************************************
+    function mousedown(evt)
+    {
+	//console.log("MOUSE:DOWN");
+
+        // Non-IE browsers will use evt
+        var ev = evt || window.event;
+
+        var canvas = document.getElementById('canvas');
+	canvas.onmousemove=mousemove;
+        
+	lastX = (ev.pageX?ev.pageX : ev.clientX + document.body.scrollLeft) - canvasPos.x;
+	lastY = (ev.pageY?ev.pageY : ev.clientY + document.body.scrollTop ) - canvasPos.y;
+        
+	capturing = inCanvasBounds(lastX, lastY);
+	mouseDown = true;
+
+	// Register click immediately
+	mousemove(evt);
+    }
+
+
+
+      
+    //************************************************************************
+    function mouseup()
+    {
+	//console.log("MOUSE:UP");
+        var canvas = document.getElementById('canvas');
+        canvas.onmousemove=null;
+	capturing = false;
+	mouseDown = false;
+    }
+
+      
+
+    //************************************************************************
+    function mousemove(evt)
+    {
+	//console.log("MOUSE:MOVE");
+
+        // Non-IE browsers will use evt
+        var ev = evt || window.event;
+        if(ev == null){
+        	return;
+        }
+
+        var penAPI = plugin().penAPI;
+        var canvas = document.getElementById('canvas');
+        var pressure = 0.0;
+        var isEraser;
+        var pointerType;
+
+        if (penAPI)
+        {
+            pressure = penAPI.pressure;
+            isEraser = penAPI.isEraser;
+            pointerType  = penAPI.pointerType;
+        }
+        else
+        {
+            pressure = 1.0;
+            isEraser = false;
+            pointerType = 0;
+        }
+        
+        if(pointerType == 0 && mouseDown){
+        	pressure = 0.5;
+        }
+
+	//console.log("pressure: " + pressure);
+        
+	curX = (ev.pageX?ev.pageX : ev.clientX + document.body.scrollLeft) - canvasPos.x;
+	curY = (ev.pageY?ev.pageY : ev.clientY + document.body.scrollTop ) - canvasPos.y;
+
+	capturing = inCanvasBounds(curX, curY);
+
+	if (capturing && pressure > 0.0)
+	{
+            if (canvas.getContext)
+	    {
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(curX, curY);
+                
+                //console.log("mousemove: cur: " + curX + "," + curY);
+
+                ctx.lineCap = 'round';
+                if (isEraser == true) 
+                {
+                    ctx.lineWidth = 25.0 * pressure;
+                    ctx.strokeStyle = "rgba(255, 255, 255, 1.0)";
+                }
+                else 
+                {
+                    ctx.lineWidth = 25.0 * pressure;
+                    ctx.strokeStyle = "rgba(255, 0, 255, 1.0)";
+                }
+		
+		//console.log("ctx.lineWidth: " + ctx.lineWidth);
+                ctx.stroke();
+	    }
+	}
+        
+        lastX = curX;
+        lastY = curY;
+
+    }
+
+
+    //************************************************************************
+    // posX and posY are assumed relative to canvas boundaries.
+    // Returns true if posX and posY are contained within canvas boundaries.
+    function inCanvasBounds( posX, posY )
+    {
+        var left = 0;
+	var top = 0;
+        var right = canvasSize.width;
+	var bottom = canvasSize.height;
+
+	return ( posX >= left && posX <= right && 
+		 posY >= top && posY <= bottom);
+    }
+
+
+
+    //************************************************************************
+    </script>
+
+    <style type="text/css">
+	    canvas { border: 5px dashed rgba(0,0,0,0.50); }
+    </style>
+
+    </head>
+
+    <body onload="onLoad();">
+
+    <font color="blue">
+
+    <!-- ********************************************************************* 
+	 Embed the WacomTabletPlugin object.
+         To avoid plugin selection on page, size and position are adjusted 
+         so as to "tuck it under" canvas. 
+         ***************************************************************** -->
+
+    <!--[if IE]>
+
+    <object id='wtPlugin' classid='CLSID:092dfa86-5807-5a94-bf3b-5a53ba9e5308' WIDTH=1 HEIGHT=1 style="position:absolute; left:100px; top:100px">
+    </object>
+
+    <![endif]--><!--[if !IE]> <-->
+
+    <object id="wtPlugin" type="application/x-wacomtabletplugin" style="position:absolute; left:100px; top:100px" height="1" width="1">
+	    <!-- <param name="onload" value="pluginLoaded" /> -->
+    </object>
+
+    <!----> <!--[endif]---->
+
+    <h2>Wacom Webplugin Canvas Paint Demo</h2>
+    <h4 id="docPluginVersion">Plugin Version: 2.1.0.3</h4>
+
+    <canvas id="canvas" onmousedown="mousedown(event);" onmouseup="mouseup();" onmousemove="mousemove();" align="left" width="640" height="480"> </canvas>
+
+
+
+
+
+</font></body></html>

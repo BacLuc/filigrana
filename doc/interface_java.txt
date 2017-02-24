@@ -1,0 +1,74 @@
+Extract Watermarks:
+	request: {
+		action: "extractWM",
+		targetFolder: "path",
+		pathToExtract: "path",
+		id: 
+	
+	
+	}
+	
+	return:{
+		check: suc, ser
+		
+	}
+	
+ExtractIPH:
+	request: {
+		action: "extractWM",
+		targetFolder: "path",
+		pathToExtract: "path"
+		id :
+	
+	}
+	
+	return:{
+		check: suc, ser,
+		count: 4
+		
+	}
+	
+	
+	
+	
+retrieve:{
+		action: "retrieveWM",
+		path : path
+	}
+	
+	return:{
+		check: suc, ser
+		result : [id: similarity.....]
+	}
+	
+	
+retrieve:{
+		action: "retrieveIPH",
+		path : path
+	}
+	
+	return:{
+		check: suc, ser
+		result : [id: similarity.....]
+	}
+
+retrieve:{
+		action: "retrieveWMwithSektch",
+		path : path
+	}
+	
+	return:{
+		check: suc, ser
+		result : [id: similarity.....]
+	}
+	
+	
+retrieve:{
+		action: "retrieveIPHWithSketch",
+		path : path
+	}
+	
+	return:{
+		check: suc, ser
+		result : [id: similarity.....]
+	}

@@ -1,0 +1,1 @@
+add a cleanup logic to reset the indices at default 2 o'clock am.

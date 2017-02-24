@@ -1,0 +1,6 @@
+syntax: glob
+web/client/img/photos
+web/server/testfile.txt
+web/client/tmp/*
+API.launch
+/var/www/html/filigrana/web/server/php/Config/config.php

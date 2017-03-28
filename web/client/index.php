@@ -492,7 +492,7 @@ include("../server/php/include.php");
 			</div>
 			<div class="row">
 				
-					<img id="choose_image_img" src="/img/test/testpictures/testwm.jpg" alt="" class ="img-responsive fill_screen_div"/>
+					<img id="choose_image_img" src="img/test/testpictures/testwm.jpg" alt="" class ="img-responsive fill_screen_div"/>
 				
 				
 			
@@ -577,7 +577,7 @@ include("../server/php/include.php");
 					<div id="background_between" class= "background-between">
 					</div>	
 					<canvas id="draw" data-processing-sources="pde/draw/draw.pde"></canvas>
-					<img id="sketch_image_img" src="/img/app/white.jpg" alt="" class ="img-responsive fill_screen_div"/>
+					<img id="sketch_image_img" src="img/app/white.jpg" alt="" class ="img-responsive fill_screen_div"/>
 					
 				</div>
 			

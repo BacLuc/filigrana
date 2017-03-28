@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project filigrana">
+	
+	
+	<path id="class.path">
+	  <fileset dir="java/cineast/lib">
+		<include name="**/*.jar" />
+	  </fileset>
+	</path>
+	
+    <target name="compile" description="Compile source">
+        <mkdir dir="java/cineast/bin" />
+        <javac srcdir="java/cineast/src"  destdir="java/cineast/bin" >
+			<classpath refid="class.path" />
+		</javac>	
+        
+    </target>
+	
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar" depends="compile">
+        <jar destfile="/var/www/html/filigrana/web/server/filigrana_feature_extraction.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="test.FeatureExtractionRunnerTest"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="/var/www/html/filigrana/web/server/java/cineast/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-feature-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-feature-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-geo-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-geo-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-io-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-io-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-ip-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-ip-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-sfm-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-sfm-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-v4l4j-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-v4l4j-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-visualize-0.17-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/BoofCV-visualize-0.17.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/bridj-0.6.2-windows-only.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/bridj-0.6.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/commons-codec-1.8-javadoc.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/commons-codec-1.8.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/ddogleg-0.5.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/ejml-0.25.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/georegression-0.6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/guava-16.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/jlibav-0.2.1-javadoc.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/jlibav-0.2.1-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/jlibav-0.2.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/log4j-api-2.0-rc2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/log4j-core-2.0-rc2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/postgresql.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/thumbnailator-0.4.6-all.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/trove-3.0.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/xstream-1.4.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/json-simple-1.1.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/var/www/html/filigrana/web/server/java/cineast/lib/joda-time-2.6.jar"/>
+        </jar>
+    </target>
+</project>

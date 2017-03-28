@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="create_run_jar" name="Create Runnable Jar for Project filigrana">
+	
+	<path id="class.path">
+	  <fileset dir="java/cineast/lib">
+		<include name="**/*.jar" />
+	  </fileset>
+	</path>
+	
+    <target name="compile" description="Compile source">
+        <mkdir dir="java/cineast/bin" />
+        <javac srcdir="java/cineast/src"  destdir="java/cineast/bin" >
+			<classpath refid="class.path" />
+		</javac>	
+        
+    </target>
+    
+    
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
-    <target name="create_run_jar">
+    <target name="create_run_jar" depends="compile">
         <jar destfile="/var/www/html/filigrana/web/server/filigranaAPI.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="cineast.api.API"/>

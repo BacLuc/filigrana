@@ -387,5 +387,6 @@ VALUES(
 'superuser', true, true, true, true, true, true, true, true, true, true, true, true, true, true
 );
 INSERT INTO users (usr_email, usr_pw_hash, usr_pw_salt, usr_validation_status, usr_validation_hash) VALUES 
-('lucius.bachmann@gmx.ch', 'ca7672a28bb75d798f2480b3a47811243493ec00b28f7e0dd9ca9db7e5afbfe6f691ee2127532a31f989cdeacd29d5fd5f2753fcd68849bbdd5c4ca0e56cedaf9329d510745fc65','9329d510745fc65',  true, '');
+('lucius.bachmann@gmx.ch', 'f4021e137b8dc9af5924f288ab885a466f60657ff4c7ea91c4f7c2a42d1f4c007d08a1bd1198cbc9d952df70457a4c85238c569cb71a37bba29f30664dd07ced9329d510745fc65','9329d510745fc65',  true, '');
 INSERT INTO usr_uro_reg(uur_usr_id, uur_uro_id, uur_reg_id) VALUES(1,4,1);
+--password is password
